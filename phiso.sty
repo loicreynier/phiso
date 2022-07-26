@@ -1,0 +1,38 @@
+\ProvidesPackage{phiso}
+
+\@ifpackageloaded{unicode-math}
+  {\PassOptionsToPackage{math-style=ISO}{unicode-math}}
+  {\RequirePackage[math-style=ISO]{unicode-math}}
+\RequirePackage{derivative}
+
+\AtBeginDocument{\renewcommand{\imath}{\symup{i}}}
+\AtBeginDocument{\renewcommand{\vec}[1]{\symbfit{#1}}}
+\AtBeginDocument{\newcommand{\mat}[1]{\symbfit{#1}}}
+\AtBeginDocument{\newcommand{\ten}[1]{\symbfsfit{#1}}}
+
+\newcommand{\FT}{\symcal{F}}
+\newcommand{\LT}{\symcal{L}}
+
+\newcommand{\Arch}{\operatorname{\mathit{A\kern-.06em r}}}
+\newcommand{\Atwo}{\operatorname{\mathit{A\kern-.06em t}}}
+\newcommand{\Biot}{\operatorname{\mathit{B\kern-.06em i}}}
+\newcommand{\Cauc}{\operatorname{\mathit{C\kern-.07em a}}}
+\newcommand{\Damk}{\operatorname{\mathit{D\kern-.06em a}}}
+\newcommand{\Eule}{\operatorname{\mathit{E\kern-.03em u}}}
+\newcommand{\Four}{\operatorname{\mathit{F\kern-.10em o}}}
+\newcommand{\Frou}{\operatorname{\mathit{F\kern-.07em r}}}
+\newcommand{\Gras}{\operatorname{\mathit{G\kern-.05em r}}}
+\newcommand{\Karl}{\operatorname{\mathit{K\kern-.11em a}}}
+\newcommand{\Knud}{\operatorname{\mathit{K\kern-.11em n}}}
+\newcommand{\Lewi}{\operatorname{\mathit{L\kern-.05em e}}}
+\newcommand{\Mach}{\operatorname{\mathit{M\kern-.10em a}}}
+\newcommand{\Nuss}{\operatorname{\mathit{N\kern-.09em u}}}
+\newcommand{\Pecl}{\operatorname{\mathit{P\kern-.08em e}}}
+\newcommand{\Pran}{\operatorname{\mathit{P\kern-.03em r}}}
+\newcommand{\Rayl}{\operatorname{\mathit{R\kern-.04em a}}}
+\newcommand{\Reyn}{\operatorname{\mathit{R\kern-.04em e}}}
+\newcommand{\Rosh}{\operatorname{\mathit{R\kern-.04em o}}}
+\newcommand{\Schm}{\operatorname{\mathit{S\kern-.07em c}}}
+\newcommand{\Sher}{\operatorname{\mathit{S\kern-.07em h}}}
+\newcommand{\Stro}{\operatorname{\mathit{S\kern-.07em r}}}
+\newcommand{\Webe}{\operatorname{\mathit{W\kern-.14em e}}}
