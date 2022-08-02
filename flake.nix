@@ -47,6 +47,18 @@
         };
       };
 
+      packages.default = pkgs.stdenv.mkDerivation rec {
+        name = "phiso";
+        pname = name;
+        src = ./.;
+        dontConfigure = true;
+        installPhase = ''
+          mkdir -p $out/tex/latex
+          cp phiso.sty $out/tex/latex
+        '';
+        tlType = "run";
+      };
+
       devShells.default = pkgs.mkShell {
         inherit (self.checks.${system}.pre-commit-check) shellHook;
       };
