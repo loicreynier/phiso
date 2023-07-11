@@ -1,0 +1,114 @@
+% LTeX: enabled=false
+
+\ProvidesPackage{phiso}
+
+\RequirePackage{ifluatex}
+\ifluatex\else
+  \PackageError{luacode}{LuaTeX is required for this package. Aborting.}{%
+  This package can only be used with the LuaTeX engine\MessageBreak
+  (command ‘lualatex’). Package loading has been stopped\MessageBreak
+  to prevent additional errors.}
+\expandafter\luacode@sty@endinput
+\fi
+
+% -- Required packages --------------------------------------------------------
+\RequirePackage{luacode}
+
+\@ifpackageloaded{unicode-math}
+  {\PassOptionsToPackage{math-style=ISO}{unicode-math}}
+  {\RequirePackage[math-style=ISO]{unicode-math}}
+
+\RequirePackage{derivative}
+
+% -- General math symbols ------------------------------------------------------
+\AtBeginDocument{\renewcommand{\imath}{\symup{i}}}
+\AtBeginDocument{\renewcommand{\vec}[1]{\symbfit{#1}}}
+\AtBeginDocument{
+  \let\nablaSymbol\nabla
+  \renewcommand{\nabla}{\symbf{\nablaSymbol}}
+}
+\AtBeginDocument{\newcommand{\mat}[1]{\symbfit{#1}}}
+\AtBeginDocument{\newcommand{\ten}[1]{\symbfsfit{#1}}}
+
+\newcommand{\trans}{^{\mkern-1.5mu\mathsf{T}}}
+
+\newcommand{\FT}{\symcal{F}}
+\newcommand{\LT}{\symcal{L}}
+
+\newcommand{\Order}{\operatorname{O}}
+\newcommand{\order}{\operatorname{o}}
+
+% -- Dimensionless numbers ----------------------------------------------------
+% Inspiration: https://tex.stackexchange.com/a/131687
+\newcommand{\Arch}{\operatorname{\mathit{A\kern-.06em r}}}
+\newcommand{\Atwo}{\operatorname{\mathit{A\kern-.06em t}}}
+\newcommand{\Biot}{\operatorname{\mathit{B\kern-.06em i}}}
+\newcommand{\Cauc}{\operatorname{\mathit{C\kern-.07em a}}}
+\newcommand{\Damk}{\operatorname{\mathit{D\kern-.06em a}}}
+\newcommand{\Ecke}{\operatorname{\mathit{E\kern-.06em c}}}
+\newcommand{\Eule}{\operatorname{\mathit{E\kern-.03em u}}}
+\newcommand{\Four}{\operatorname{\mathit{F\kern-.10em o}}}
+\newcommand{\Frou}{\operatorname{\mathit{F\kern-.07em r}}}
+\newcommand{\Gras}{\operatorname{\mathit{G\kern-.05em r}}}
+\newcommand{\Hart}{\operatorname{\mathit{H\kern-.05em a}}}
+\newcommand{\Karl}{\operatorname{\mathit{K\kern-.11em a}}}
+\newcommand{\Knud}{\operatorname{\mathit{K\kern-.11em n}}}
+\newcommand{\Lapl}{\operatorname{\mathit{L\kern-.05em a}}}
+\newcommand{\Lewi}{\operatorname{\mathit{L\kern-.05em e}}}
+\newcommand{\Mach}{\operatorname{\mathit{M\kern-.10em a}}}
+\newcommand{\Nuss}{\operatorname{\mathit{N\kern-.09em u}}}
+\newcommand{\Pecl}{\operatorname{\mathit{P\kern-.08em e}}}
+\newcommand{\Pran}{\operatorname{\mathit{P\kern-.03em r}}}
+\newcommand{\Rayl}{\operatorname{\mathit{R\kern-.04em a}}}
+\newcommand{\Reyn}{\operatorname{\mathit{R\kern-.04em e}}}
+\newcommand{\Rich}{\operatorname{\mathit{R\kern-.04em i}}}
+\newcommand{\Rosh}{\operatorname{\mathit{R\kern-.04em o}}}
+\newcommand{\Schm}{\operatorname{\mathit{S\kern-.07em c}}}
+\newcommand{\Sher}{\operatorname{\mathit{S\kern-.07em h}}}
+\newcommand{\Stro}{\operatorname{\mathit{S\kern-.07em r}}}
+\newcommand{\Webe}{\operatorname{\mathit{W\kern-.14em e}}}
+
+% -- Sub/superscript kerning fix -----------------------------------------------
+% Source: https://tex.stackexchange.com/a/432291
+\begin{luacode}
+function suppl_math_kerning(s)
+  -- Subscript combinations
+  -- \nabla
+  s = s:gsub ("(\\nabla)%s-_%s-(%b{})"  , "%1_{\\mkern-4mu %2}")
+  s = s:gsub ("(\\nabla)%s-_%s-(%w)"    , "%1_{\\mkern-4mu %2}")
+  -- \Gamma
+  s = s:gsub ("(\\Gamma)%s-_%s-(%b{})"  , "%1_{\\mkern-4mu %2}")
+  s = s:gsub ("(\\Gamma)%s-_%s-(%w)"    , "%1_{\\mkern-4mu %2}")
+  -- \Psi
+  s = s:gsub ("(\\Psi)%s-_%s-(%b{})"    , "%1_{\\mkern-3mu %2}")
+  s = s:gsub ("(\\Psi)%s-_%s-(%w)"      , "%1_{\\mkern-3mu %2}")
+  -- \Upsilon
+  s = s:gsub ("(\\Upsilon)%s-_%s-(%b{})", "%1_{\\mkern-3mu %2}")
+  s = s:gsub ("(\\Upsilon)%s-_%s-(%w)"  , "%1_{\\mkern-3mu %2}")
+  -- letters T, V, W, Y
+  s = s:gsub ("([VWY])%s-_%s-(%b{})"    , "%1_{\\mkern-3mu %2}")
+  s = s:gsub ("([VWY])%s-_%s-(%w)"      , "%1_{\\mkern-3mu %2}")
+  -- letters F, P, T
+  s = s:gsub ("([FPT])%s-_%s-(%b{})"    , "%1_{\\mkern-1.5mu %2}")
+  s = s:gsub ("([FPT])%s-_%s-(%w)"      , "%1_{\\mkern-1.5mu %2}")
+
+  -- Superscript combinations
+  -- \Delta
+  s = s:gsub ("(\\Delta)%s-%^%s-(%b{})" , "%1^{\\mkern-3mu %2}")
+  s = s:gsub ("(\\Delta)%s-%^%s-(%w)"   , "%1^{\\mkern-3mu %2}")
+  -- \Lambda
+  s = s:gsub ("(\\Lambda)%s-%^%s-(%b{})", "%1^{\\mkern-3mu %2}")
+  s = s:gsub ("(\\Lambda)%s-%^%s-(%w)"  , "%1^{\\mkern-3mu %2}")
+  -- \lambda
+  s = s:gsub ("(\\lambda)%s-%^%s-(%b{})", "%1^{\\mkern-2mu %2}")
+  s = s:gsub ("(\\lambda)%s-%^%s-(%w)"  , "%1^{\\mkern-2mu %2}")
+  -- letters A, L
+  s = s:gsub ("([AL])%s-%^%s-(%b{})"    , "%1^{\\mkern-1.5mu %2}")
+  s = s:gsub ("([AL])%s-%^%s-(%w)"      , "%1^{\\mkern-1.5mu %2}")
+  return s
+end
+\end{luacode}
+\newcommand\SupplKernOn{\directlua{luatexbase.add_to_callback(
+  "process_input_buffer", suppl_math_kerning , "suppl_math_kerning" )}}
+\newcommand\SupplKernOff{\directlua{luatexbase.remove_from_callback(
+  "process_input_buffer", "suppl_math_kerning" )}}
