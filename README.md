@@ -30,7 +30,8 @@ into your LaTeX document's source folder,
 or install it in your `$TEXMFHOME` directory with the following command:
 
 ```shell
-wget https://github.com/loicreynier/phiso/blob/main/phiso.sty -O "$TEXMFHOME/phiso.sty"
+wget https://github.com/loicreynier/phiso/blob/main/phiso.sty \
+     -O "$TEXMFHOME/phiso.sty"
 ```
 
 After installation,

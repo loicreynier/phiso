@@ -11,7 +11,7 @@
 \expandafter\luacode@sty@endinput
 \fi
 
-% -- Required packages --------------------------------------------------------
+% -- Required packages -------------------------------------------------------
 \RequirePackage{luacode}
 
 \@ifpackageloaded{unicode-math}
@@ -20,7 +20,7 @@
 
 \RequirePackage{derivative}
 
-% -- General math symbols ------------------------------------------------------
+% -- General math symbols ----------------------------------------------------
 \AtBeginDocument{\renewcommand{\imath}{\symup{i}}}
 \AtBeginDocument{\renewcommand{\vec}[1]{\symbfit{#1}}}
 \AtBeginDocument{
@@ -38,7 +38,7 @@
 \newcommand{\Order}{\operatorname{O}}
 \newcommand{\order}{\operatorname{o}}
 
-% -- Dimensionless numbers ----------------------------------------------------
+% -- Dimensionless numbers ---------------------------------------------------
 % Inspiration: https://tex.stackexchange.com/a/131687
 \newcommand{\Arch}{\operatorname{\mathit{A\kern-.06em r}}}
 \newcommand{\Atwo}{\operatorname{\mathit{A\kern-.06em t}}}
@@ -68,7 +68,7 @@
 \newcommand{\Stro}{\operatorname{\mathit{S\kern-.07em r}}}
 \newcommand{\Webe}{\operatorname{\mathit{W\kern-.14em e}}}
 
-% -- Sub/superscript kerning fix -----------------------------------------------
+% -- Sub/superscript kerning fix ---------------------------------------------
 % Source: https://tex.stackexchange.com/a/432291
 \begin{luacode}
 function suppl_math_kerning(s)
