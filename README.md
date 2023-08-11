@@ -20,6 +20,19 @@ the following package are required:
 - [`derivative`][derivative]
 - [`unicode-math`][unicode_math]
 
+## Package options
+
+The package offers several options for tailoring its behavior.
+These options can be enabled using the following:
+
+```latex
+\usepackage[<option1>,<option2>]{phiso}
+```
+
+Below is the enumeration of these options:
+
+- `mathtools`: load the `mathtools` package prior to `unicode-math`
+
 ## Installation
 
 As a personal package,

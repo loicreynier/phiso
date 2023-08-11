@@ -11,6 +11,16 @@
 \expandafter\luacode@sty@endinput
 \fi
 
+% -- Package options ---------------------------------------------------------
+\RequirePackage{kvoptions} % Required to load package from options
+
+\DeclareBoolOption{mathtools} % Option to load `mathtools`
+
+\ProcessKeyvalOptions*
+\ifphiso@mathtools
+  \RequirePackage{mathtools} % Must be loaded before `unicode-math`
+\fi
+
 % -- Required packages -------------------------------------------------------
 \RequirePackage{luacode}
 
