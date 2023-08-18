@@ -25,8 +25,24 @@
 \RequirePackage{luacode}
 
 \@ifpackageloaded{unicode-math}
-  {\PassOptionsToPackage{math-style=ISO}{unicode-math}}
-  {\RequirePackage[math-style=ISO]{unicode-math}}
+  {
+    \ifphiso@mathtools
+      \PassOptionsToPackage{%
+        math-style=ISO,%
+        warnings-off={mathtools-colon,mathtools-overbracket}}{unicode-math}
+    \else
+        \PassOptionsToPackage{math-style=ISO}{unicode-math}
+    \fi
+  }
+  {
+    \ifphiso@mathtools
+      \RequirePackage[%
+        math-style=ISO,%
+        warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+    \else
+      \RequirePackage[maths-style=ISO]{unicode-math}
+    \fi
+  }
 
 \RequirePackage{derivative}
 
