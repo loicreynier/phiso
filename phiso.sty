@@ -47,7 +47,11 @@
 \RequirePackage{derivative}
 
 % -- General math symbols ----------------------------------------------------
+% `unicode-math` does its definition in `\AtBeginDocument`
+% so one needs to do the same to overwrite
 \AtBeginDocument{\renewcommand{\imath}{\symup{i}}}
+\AtBeginDocument{\renewcommand{\Re}{\operatorname{Re}}}
+\AtBeginDocument{\renewcommand{\Im}{\mathrm{Im}}}
 \AtBeginDocument{\renewcommand{\vec}[1]{\symbfit{#1}}}
 \AtBeginDocument{
   \let\nablaSymbol\nabla
