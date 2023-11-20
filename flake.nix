@@ -29,7 +29,10 @@
             alejandra.enable = true;
             commitizen.enable = true;
             editorconfig-checker.enable = true;
-            prettier.enable = true;
+            prettier = {
+              enable = true;
+              excludes = ["flake.lock"];
+            };
             statix.enable = true;
             typos.enable = true;
           };
