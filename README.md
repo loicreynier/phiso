@@ -32,6 +32,7 @@ These options can be enabled using the following:
 Below is the enumeration of these options:
 
 - `mathtools`: load the `mathtools` package prior to `unicode-math`
+- `nablaregular`: use regular symbol (not bold) for nabla
 
 ## Installation
 
