@@ -13,8 +13,10 @@
 
 % -- Package options ---------------------------------------------------------
 \RequirePackage{kvoptions} % Required to load package from options
+\SetupKeyvalOptions{family=phiso,prefix=phiso@}
 
 \DeclareBoolOption{mathtools} % Option to load `mathtools`
+\DeclareBoolOption{nablaregular} % Option to not use bold symbol for nabla
 
 \ProcessKeyvalOptions*
 \ifphiso@mathtools
@@ -53,12 +55,15 @@
 \AtBeginDocument{\renewcommand{\Re}{\operatorname{Re}}}
 \AtBeginDocument{\renewcommand{\Im}{\mathrm{Im}}}
 \AtBeginDocument{\renewcommand{\vec}[1]{\symbfit{#1}}}
-\AtBeginDocument{
-  \let\nablaSymbol\nabla
-  \renewcommand{\nabla}{\symbf{\nablaSymbol}}
-}
 \AtBeginDocument{\newcommand{\mat}[1]{\symbfit{#1}}}
 \AtBeginDocument{\newcommand{\ten}[1]{\symbfsfit{#1}}}
+
+\ifphiso@nablaregular\else
+  \AtBeginDocument{
+    \let\nablaSymbol\nabla
+    \renewcommand{\nabla}{\symbf{\nablaSymbol}}
+  }
+\fi
 
 \newcommand{\trans}{^{\mkern-1.5mu\mathsf{T}}}
 
