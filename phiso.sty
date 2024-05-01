@@ -54,11 +54,25 @@
 \AtBeginDocument{\renewcommand{\imath}{\symup{i}}}
 \AtBeginDocument{\renewcommand{\Re}{\operatorname{Re}}}
 \AtBeginDocument{\renewcommand{\Im}{\mathrm{Im}}}
-\AtBeginDocument{\newcommand{\bigo}{\operatorname{O}}}
-\AtBeginDocument{\newcommand{\smallo}{\operatorname{o}}}
 \AtBeginDocument{\renewcommand{\vec}[1]{\symbfit{#1}}}
 \AtBeginDocument{\newcommand{\mat}[1]{\symbfit{#1}}}
 \AtBeginDocument{\newcommand{\ten}[1]{\symbfsfit{#1}}}
+
+\ifphiso@mathtools
+  \AtBeginDocument{
+    \DeclarePairedDelimiterXPP\bigo[1]{\symup{O}}{(}{)}{}{#1}
+    \DeclarePairedDelimiterXPP\smallo[1]{\symup{o}}{(}{)}{}{#1}
+    \DeclarePairedDelimiterXPP\bigoSI[2]%
+      {\symup{O}}{(}{)}{}%
+      {\SI{#1}{€2}}
+  }
+\else
+  \AtBeginDocument{
+    \newcommand{\bigo}{\operatorname{O}}
+    \newcommand{\smallo}{\operatorname{o}}
+  }
+\fi
+
 
 \ifphiso@nablaregular\else
   \AtBeginDocument{
