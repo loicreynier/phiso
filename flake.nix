@@ -20,12 +20,12 @@
   in
     flake-utils.lib.eachSystem supportedSystems (system: let
       pkgs = import nixpkgs {inherit system;};
-    in rec {
+    in {
       checks = {
         pre-commit-check = pre-commit-hooks.lib.${system}.run {
           src = ./.;
 
-          hooks = with pkgs; {
+          hooks = {
             alejandra.enable = true;
             commitizen.enable = true;
             editorconfig-checker.enable = true;
@@ -66,8 +66,15 @@
         default = texlive-phiso;
       };
 
-      devShells.default = pkgs.mkShell {
-        inherit (self.checks.${system}.pre-commit-check) shellHook;
+      devShells = {
+        default = pkgs.mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+        };
+        tests = pkgs.mkShell {
+          packages = [
+            self.packages.${system}.texlive-phiso
+          ];
+        };
       };
     });
 }
