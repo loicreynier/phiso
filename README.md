@@ -33,6 +33,8 @@ Below is the enumeration of these options:
 
 - `mathtools`: load the `mathtools` package prior to `unicode-math`
 - `nablaregular`: use regular symbol (not bold) for nabla
+- `diffitalic`: use italic symbol for differential
+  (pass the `italic=true` option to `derivative`)
 
 ## Installation
 

@@ -17,6 +17,7 @@
 
 \DeclareBoolOption{mathtools} % Option to load `mathtools`
 \DeclareBoolOption{nablaregular} % Option to not use bold symbol for nabla
+\DeclareBoolOption{diffitalic} % Option to use italic differential symbol
 
 \ProcessKeyvalOptions*
 \ifphiso@mathtools
@@ -46,7 +47,11 @@
     \fi
   }
 
-\RequirePackage{derivative}
+\ifphiso@diffitalic
+  \RequirePackage[italic=true]{derivative}
+\else
+  \RequirePackage{derivative}
+\fi
 
 % -- General math symbols ----------------------------------------------------
 % `unicode-math` does its definition in `\AtBeginDocument`
