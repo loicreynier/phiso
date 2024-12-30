@@ -4,9 +4,10 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs";
-    pre-commit-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 
@@ -14,7 +15,7 @@
     self,
     flake-utils,
     nixpkgs,
-    pre-commit-hooks,
+    git-hooks,
   }: let
     supportedSystems = ["x86_64-linux"];
   in
@@ -22,7 +23,7 @@
       pkgs = import nixpkgs {inherit system;};
     in {
       checks = {
-        pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        pre-commit-check = git-hooks.lib.${system}.run {
           src = ./.;
 
           hooks = {
